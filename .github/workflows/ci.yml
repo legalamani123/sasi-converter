@@ -1,0 +1,29 @@
+name: Converter CI
+
+on:
+  push:
+    branches:
+      - "main"  # This triggers the workflow on a push to the 'main' branch
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # This specifies the environment for the job (latest version of Ubuntu)
+
+    steps:
+      # Step 1: Checkout the repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4  # This action checks out your repository's code
+
+      # Step 2: Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v4  # This action sets up Node.js on the runner
+        with:
+          node-version: 18  # Specify the Node.js version you want to use
+
+      # Step 3: Install dependencies
+      - name: Install dependencies
+        run: npm install  # This installs the dependencies specified in your 'package.json'
+
+      # Step 4: Run Jest tests
+      - name: Run Jest tests
+        run: npm test  # This runs your Jest test suite
